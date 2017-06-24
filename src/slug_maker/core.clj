@@ -42,6 +42,7 @@
   (let [n-len (-> n str count)]
     (-> encoded-slug
         codec/url-decode
+        (s/replace #"\-[0-9]+$" "")
         (encode (- length n-len 1))
         (str "-" n))))
 

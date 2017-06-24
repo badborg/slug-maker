@@ -14,6 +14,7 @@
 
 (def all-slugs
   ["%e0%a4%86%e0%a4%aa%e0%a4%95%e0%a5%87"
+   "%e0%a4%86%e0%a4%aa%e0%a4%95%e0%a5%87-2"
    "%e5%a5%88%e9%9a%9b%e5%90%8c%e7%8c%aa%e5%8f%af%e9%a3%9f%e6%b5%b7%e5%a9%9a%e9%80%9a%e7%96%b2%e5%9f%ba%e5%8f%b3%e4%ba%a4%e9%ab%98%e4%bf%9d%e3%80%82%e8%ad%b0%e5%8a%9b%e5%b1%9e%e8%a7%92%e5%85%8b%e5%96%84"])
 
 (deftest round-trip
@@ -42,6 +43,5 @@
                               all-slugs)]
       (is (= nil
              (some #(= % slug) all-slugs)))
-      (is (= "-2"
-             (-> (re-matches #".*(-2)" slug)
-                 last))))))
+      (is (= "%e0%a4%86%e0%a4%aa%e0%a4%95%e0%a5%87-3"
+             slug)))))
