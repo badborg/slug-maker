@@ -4,12 +4,20 @@
 
 (def default-length 200)
 
+(defn- strip-tags
+  [string]
+  (.text (org.jsoup.Jsoup/parse string)))
+
 (defn- pre-encode
   [string]
   (-> string
       codec/url-decode
       s/trim
-      (s/replace #"\s+" "-")))
+      strip-tags
+      (s/replace #"[\p{Z}\p{P}]+" "-")
+      (s/replace #"[^\p{L}\p{M}0-9\-]" "")
+      (s/replace #"\-$" "")
+      (s/replace #"^\-" "")))
 
 (defn encode
   [string & [length]]
@@ -17,11 +25,9 @@
     (->> (s/split (pre-encode string) #"")
          (take length)
          (map (fn [c]
-                (if (re-matches #"[\x00-\x7F]" c)
-                  c
-                  (-> c
-                      codec/url-encode
-                      s/lower-case))))
+                (-> c
+                    codec/url-encode
+                    s/lower-case)))
          (reduce
            (fn [enc-str enc-chr]
              (let [apnd-enc-str (str enc-str enc-chr)]

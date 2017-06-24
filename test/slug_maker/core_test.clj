@@ -6,6 +6,9 @@
 (def short-string
   "आपके")
 
+(def ascii
+  "?Lorem ipsum 1% dolor  - sit_amet, everti <div>mentitum</div> .")
+
 (def long-string
   "奈際同猪可食海婚通疲基右交高保。議力属角克善港禁射任者栖約作左民止者抜。特各載久六碁出情画賃題何政稿代。顕禁心長田代脳能料放上一験関止最甲制型亡。注点芸特問体更今麺考崎戻銀止関府本金速手。晴位対展的用居質願核指変者。休全各禁覆追充度星世退間達作費征銃本。世収暮毎変根予絵結町経応止通給。瞬雄文稿掲事添供成敗保器解長。")
 
@@ -26,6 +29,12 @@
            (-> long-string
                encode
                count)))))
+
+(deftest encode-ascii
+  (testing "Url encode ascii string"
+    (is (= "lorem-ipsum-1-dolor-sit-amet-everti-mentitum"
+           (-> ascii
+               encode)))))
 
 (deftest unique-slug
   (testing "If slug is not unique, add suffix"
