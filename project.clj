@@ -4,6 +4,4 @@
   :license {:name "MIT License"
             :url "https://opensource.org/licenses/MIT"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [ring/ring-codec "1.0.1"]]
-  :repositories [["local" {:url "file:maven"
-                           :sign-release false}]])
+                 [ring/ring-codec "1.0.1"]])
